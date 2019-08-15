@@ -4,6 +4,24 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class App {
+    public static void main(String[] args)
+    {
+        // Create new Application
+        App a = new App();
+
+        // Connect to database
+        a.connect();
+
+        // Extract employee salary information
+        ArrayList<Employee> employees = a.getAllSalaries();
+        a.printSalaries(employees);
+
+        // Test the size of the returned data - should be 240124
+        System.out.println(employees.size());
+
+        // Disconnect from database
+        a.disconnect();
+    }
     /**
      * Connection to MySQL database.
      */
@@ -70,23 +88,7 @@ public class App {
         }
     }
 
-    public static void main(String[] args)
-    {
-        // Create new Application
-        App a = new App();
 
-        // Connect to database
-        a.connect();
-
-        // Extract employee salary information
-        ArrayList<Employee> employees = a.getAllSalaries();
-
-        // Test the size of the returned data - should be 240124
-        System.out.println(employees.size());
-
-        // Disconnect from database
-        a.disconnect();
-    }
     public Employee getEmployee(int ID)
     {
         try
@@ -135,10 +137,12 @@ public class App {
                             + "Manager: " + emp.manager + "\n");
         }
     }
+
     /**
      * Gets all the current employees and salaries.
      * @return A list of all employees and salaries, or null if there is an error.
      */
+
     public ArrayList<Employee> getAllSalaries()
     {
         try

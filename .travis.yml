@@ -1,6 +1,5 @@
 language: java
 
-
 sudo: false
 
 addons:
@@ -23,10 +22,10 @@ jobs:
     - stage: unit tests
       install: skip
       jdk: oraclejdk11
-      script: mvn test -Dtest=com.napier.sem.AppTest
+      script: mvn test -Dtest=com.napier.sem.test
     - stage: integration tests
       jdk: oraclejdk11
-      script: echo "Integration Tests"
+      script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
     - stage: deploy
       install: skip
       jdk: oraclejdk11
@@ -34,6 +33,8 @@ jobs:
 
 stages:
   - unit tests
+
   - integration tests
   - name: deploy
     if: branch = master
+
